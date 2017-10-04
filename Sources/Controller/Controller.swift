@@ -66,7 +66,7 @@ public class Controller {
   /**
   * Handler for getting a text/plain response.
   */
-  public func getHello(request: RouterRequest, response: RouterResponse, next: @escaping () -> Void) throws {
+  public func getHello(request: RouterRequest, response: RouterResponse, next: @escaping () -> Void) any {
 
     let username = "a86fdfae-0aeb-45e2-a5ee-2abcef27e879"
     let password = "CbwTsQxxGCZQ"
@@ -75,11 +75,10 @@ public class Controller {
     let personalityInsights = PersonalityInsights(username: username, password: password, version: version)
     let text = "While GE’s Predix platform has been promoted on TV and covered in the New York Times and other leading publications, none of the press coverage has explained concretely what technology GE is building with Predix. This story will do just that based on my visit to the recent Predix Transform conference, interviews with people building applications using Predix, and work done creating content to explain Predix for GE. While GE’s Predix platform has been promoted on TV and covered in the New York Times and other leading publications, none of the press coverage has explained concretely what technology GE is building with Predix. This story will do just that based on my visit to the recent Predix Transform conference, interviews with people building applications using Predix, and work done creating content to explain Predix for GE."
     let failure = { (error: Error) in print(error) }
-    personalityInsights.getProfile(fromText: text, failure: failure) { 
-        profile in print(profile) 
+    personalityInsights.getProfile(fromText: text, failure: failure) { profile in 
+        print(profile) 
       // let json = try? JSONSerialization.jsonObject(with: profile, options: [])
       // let jsonString = try? JSONSerialization.jsonObject(with: profile, options: []) as! [String: Any]
-        print (profile)
         response.headers["Content-Type"] = "application/json; charset=utf-8"
         var jsonResponse = JSON([:])
 //         jsonResponse["framework"].stringValue = "Kitura"
